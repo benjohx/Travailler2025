@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 $user = Utilisateur::getUserByPseudo($_SESSION['user']['pseudo']);
 ?>
 <style>
-/* Container for Profile */
+
 .profile-container {
   max-width: 600px;
   margin: 0 auto;
@@ -19,7 +19,7 @@ $user = Utilisateur::getUserByPseudo($_SESSION['user']['pseudo']);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Heading */
+
 .profile-container h1 {
   font-size: 2em;
   margin-bottom: 20px;
@@ -27,21 +27,21 @@ $user = Utilisateur::getUserByPseudo($_SESSION['user']['pseudo']);
   padding-bottom: 10px;
 }
 
-/* Profile Details */
+
 .profile-container p {
   font-size: 1em;
   line-height: 1.6;
   margin: 10px 0;
 }
 
-/* Strong label styling */
+
 .profile-container p strong {
   display: inline-block;
   width: 120px;
   color: #555;
 }
 
-/* Logout link styling */
+
 .profile-container a {
   display: inline-block;
   margin-top: 20px;
@@ -56,14 +56,30 @@ $user = Utilisateur::getUserByPseudo($_SESSION['user']['pseudo']);
 .profile-container a:hover {
   background-color: #0056b3;
 }
+.profile-picture img {
+    width: 150px; /* Adjust size */
+    height: 150px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 15px;
+}
+
+
 </style>
 
 
 <div class="profile-container">
+  
+  <div class="profile-picture">
+    <img src="<?= !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : 'img/pro.jpg'; ?>" 
+         alt="Photo de profil de <?= htmlspecialchars($user['pseudo']) ?>" />
+  </div>
+
   <h1>Profil de <?= htmlspecialchars($user['pseudo']) ?></h1>
   <p><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></p>
   <p><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></p>
   <p><strong>Âge :</strong> <?= htmlspecialchars($user['age']) ?> ans</p>
   <p><strong>Ville :</strong> <?= htmlspecialchars($user['ville_nom']) ?></p>
-  <p><strong>Nationalité :</strong> <?= strtoupper(substr(htmlspecialchars($user['pays']), 0, 3)) ?></p>
+  <p><strong>Nationalité :</strong> <?= strtoupper(substr(htmlspecialchars($user['pays']), 0, 4)) ?></p>
 </div>
